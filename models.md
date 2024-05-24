@@ -1,34 +1,33 @@
----
-title: "adrian title"
-date: March 22, 2005
-author: John dow
-output: github_document
----
+adrian title
+================
+John dow
+March 22, 2005
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code.
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you
+execute code within the notebook, the results appear beneath the code.
 
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*.
-
+Try executing this chunk by clicking the *Run* button within the chunk
+or by placing your cursor inside it and pressing *Cmd+Shift+Enter*.
 
 Load libraries
 
-```{r}
+``` r
 library(nlme)
 ```
 
 read data
 
-```{r}
+``` r
 df = read.csv('/Users/adrian/onedrive_uvic/OneDrive - Universitat de Vic/Data PhyChe/PhyChe_XY.csv')
 ```
 
-```{r}
+``` r
 df_no_nas <- na.omit(df)
 ```
 
 this is a description
 
-```{r}
+``` r
 m1 = lme(
   fixed = TP ~ Imp_grassland_100 + Open_nature_100 + Forest_100 + Pasture_100 + Urban_100 + Other_100 + Forest_5  + Animals_cont + Area + Depth + T1 + P1, 
   random = list(~1|PondCode, ~1|Country,~ 0+Imp_grassland_100|Country,~ 0+Open_nature_100|Country,~ 0+Forest_100|Country,~ 0+Pasture_100|Country,~ 0+Urban_100|Country,~ 0+Other_100|Country),
@@ -37,8 +36,10 @@ m1 = lme(
   na.action = na.omit)
 ```
 
-```{r}
+``` r
 plot(m1)
 ```
+
+![](models_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 this is some text

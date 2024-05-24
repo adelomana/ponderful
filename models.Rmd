@@ -1,0 +1,44 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code.
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*.
+
+
+Load libraries
+
+```{r}
+library(nlme)
+```
+
+read data
+
+```{r}
+df = read.csv('/Users/adrian/onedrive_uvic/OneDrive - Universitat de Vic/Data PhyChe/PhyChe_XY.csv')
+```
+
+```{r}
+df_no_nas <- na.omit(df)
+```
+
+this is a description
+
+```{r}
+m1 = lme(
+  fixed = TP ~ Imp_grassland_100 + Open_nature_100 + Forest_100 + Pasture_100 + Urban_100 + Other_100 + Forest_5  + Animals_cont + Area + Depth + T1 + P1, 
+  random = list(~1|PondCode, ~1|Country,~ 0+Imp_grassland_100|Country,~ 0+Open_nature_100|Country,~ 0+Forest_100|Country,~ 0+Pasture_100|Country,~ 0+Urban_100|Country,~ 0+Other_100|Country),
+  method = "ML",
+  data = df, 
+  na.action = na.omit)
+```
+
+```{r}
+plot(m1)
+```
+
+this is some text

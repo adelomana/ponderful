@@ -1,0 +1,62 @@
+---
+title: "adrian title"
+date: March 22, 2005
+author: John dow
+output: github_document
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code.
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*.
+
+
+Load libraries
+
+```{r}
+library(nlme)
+```
+
+read data
+
+```{r}
+df = read.csv('/Users/adrian/onedrive_uvic/OneDrive - Universitat de Vic/Data PhyChe/PhyChe_XY.csv')
+```
+
+```{r}
+df_no_nas <- na.omit(df)
+```
+
+this is a description
+
+```{r}
+boxplot(TN ~ Country, data=df)
+stripchart(TN ~ Country, data = df, method = "jitter", add=TRUE, pch = 19, col=1:8, jitter=0.1, vertical = TRUE)
+
+boxplot(TP ~ Country, data=df)
+stripchart(TP ~ Country, data = df, method = "jitter", add=TRUE, pch = 19, col=1:8, jitter=0.1, vertical = TRUE)
+```
+
+
+
+```{r}
+boxplot(Animals_cont.t ~ Country, data=df)
+boxplot(Forest_5.t ~ Country, data=df)
+```
+
+
+
+
+```{r}
+m1 = lme(
+  fixed = TP ~ Animals_cont.t, 
+  random = list(~1|PondCode, ~1|Country,~ 0+Imp_grassland_100|Country),
+  method = "ML",
+  data = df, 
+  na.action = na.omit)
+```
+
+```{r}
+plot(m1)
+```
+
+this is some text
